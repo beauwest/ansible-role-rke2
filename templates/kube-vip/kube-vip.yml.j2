@@ -16,16 +16,10 @@ spec:
       labels:
         app.kubernetes.io/name: kube-vip-ds
     spec:
+{% if rke2_kubevip_affinity %}
       affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node-role.kubernetes.io/master
-                operator: Exists
-            - matchExpressions:
-              - key: node-role.kubernetes.io/control-plane
-                operator: Exists
+{{ rke2_kubevip_affinity | to_nice_yaml(indent=2) | trim | indent(8, first=True) }}
+{%- endif %}
       containers:
       - args:
         - manager

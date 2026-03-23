@@ -133,6 +133,11 @@ argument_specs:
         default: 2112
         description: "Prometheus metrics port for kube-vip"
 
+      rke2_kubevip_affinity:
+        type: dict
+        default: {}
+        description: "Configure affinity rules for kube-vip pods"
+
       rke2_additional_sans:
         type: list
         default: []

@@ -121,6 +121,18 @@ rke2_kubevip_service_election_enable: true
 # Prometheus metrics port for kube-vip
 rke2_kubevip_metrics_port: 2112
 
+# Affinity rules for kube-vip pods
+rke2_kubevip_affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: node-role.kubernetes.io/master
+              operator: Exists
+        - matchExpressions:
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists
+
 # Add additional SANs in k8s API TLS cert
 rke2_additional_sans: []
 
